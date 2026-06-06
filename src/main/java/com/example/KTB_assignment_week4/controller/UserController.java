@@ -1,13 +1,11 @@
 package com.example.KTB_assignment_week4.controller;
 
+import com.example.KTB_assignment_week4.dto.UserInfoResponse;
 import com.example.KTB_assignment_week4.dto.UserLoginRequest;
 import com.example.KTB_assignment_week4.dto.UserSignupRequest;
 import com.example.KTB_assignment_week4.service.UserService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -28,5 +26,12 @@ public class UserController {
     public Long userSignup(@Valid @RequestBody UserSignupRequest userSignupRequest){
         Long response = userService.signup(userSignupRequest);
         return response;
+    }
+
+    @GetMapping("/{userId}")
+    public UserInfoResponse getUserInfo(@Valid @PathVariable Long userId){
+        UserInfoResponse userInfoResponse = userService.getUserInfo(userId);
+
+        return userInfoResponse;
     }
 }

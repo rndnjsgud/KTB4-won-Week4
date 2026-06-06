@@ -2,12 +2,14 @@ package com.example.KTB_assignment_week4.service;
 
 import com.example.KTB_assignment_week4.domain.User;
 import com.example.KTB_assignment_week4.domain.UserRole;
+import com.example.KTB_assignment_week4.dto.UserInfoResponse;
 import com.example.KTB_assignment_week4.dto.UserLoginRequest;
 import com.example.KTB_assignment_week4.dto.UserSignupRequest;
 import com.example.KTB_assignment_week4.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -61,6 +63,20 @@ public class UserService {
         User user = new User(userId, nickname, email, password, UserRole.USER, false, profileImage);
 
         return userRepository.saveUser(user);
+    }
+
+    public UserInfoResponse getUserInfo(Long userId) throws NoSuchElementException{
+        Optional<User> userFoundById = userRepository.findByUserId(userId);
+        String email = userFoundById.orElseThrow(NoSuchElementException::new).getEmail();
+        String nickname = userFoundById.orElseThrow(NoSuchElementException::new).getNickname();
+        String profileImage = userFoundById.orElseThrow(NoSuchElementException::new).getProfileImage();
+
+        UserInfoResponse userInfoResponse = new UserInfoResponse();
+        userInfoResponse.setEmail(email);
+        userInfoResponse.setNickname(nickname);
+        userInfoResponse.setProfileImage(profileImage);
+
+        return userInfoResponse;
     }
 
 }

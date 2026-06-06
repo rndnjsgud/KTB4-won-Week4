@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -73,5 +74,14 @@ public class JavaUserRepository implements UserRepository{
     public Long saveUser(User user) {
         userData.add(user);
         return user.getUserId();
+    }
+
+    @Override
+    public Optional<User> findByUserId(Long userId){
+        Optional<User> foundUser = userData.stream()
+                .filter(user -> Objects.equals(user.getUserId(), userId))
+                .findAny();
+
+        return foundUser;
     }
 }
