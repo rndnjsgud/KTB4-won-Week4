@@ -3,6 +3,7 @@ package com.example.KTB_assignment_week4.service;
 import com.example.KTB_assignment_week4.domain.User;
 import com.example.KTB_assignment_week4.dto.UserLoginRequest;
 import com.example.KTB_assignment_week4.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,7 +17,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public String login(UserLoginRequest userLoginRequest) throws IllegalArgumentException{
+    public String login(@Valid UserLoginRequest userLoginRequest) throws IllegalArgumentException{
         String email = userLoginRequest.getEmail();
         String password = userLoginRequest.getPassword();
 

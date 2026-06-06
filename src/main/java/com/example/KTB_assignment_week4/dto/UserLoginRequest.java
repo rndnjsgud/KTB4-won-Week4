@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class UserLoginRequest { //로그인 요청 시 사용
-    @NotBlank
+    @NotBlank(message = "이메일은 필수 입력값입니다.")
     private String email;
-    @NotBlank
+    @NotBlank(message = "비밀번호는 필수 입력값입니다")
     private String password;
 }
