@@ -4,10 +4,7 @@ import com.example.KTB_assignment_week4.domain.User;
 import com.example.KTB_assignment_week4.domain.UserRole;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class JavaUserRepository implements UserRepository{
@@ -83,5 +80,12 @@ public class JavaUserRepository implements UserRepository{
                 .findAny();
 
         return foundUser;
+    }
+
+    @Override
+    public void modifyUserInfo(Long userId, User modifiedUser) {
+        Optional<User> modifyTargetUser = findByUserId(userId);
+        int indexOfFoundUser = userData.indexOf(modifyTargetUser.orElseThrow(NoSuchElementException::new));
+        userData.set(indexOfFoundUser, modifiedUser);
     }
 }

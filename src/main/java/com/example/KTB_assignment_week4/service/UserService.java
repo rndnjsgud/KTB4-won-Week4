@@ -2,6 +2,7 @@ package com.example.KTB_assignment_week4.service;
 
 import com.example.KTB_assignment_week4.domain.User;
 import com.example.KTB_assignment_week4.domain.UserRole;
+import com.example.KTB_assignment_week4.dto.UserInfoModifyRequest;
 import com.example.KTB_assignment_week4.dto.UserInfoResponse;
 import com.example.KTB_assignment_week4.dto.UserLoginRequest;
 import com.example.KTB_assignment_week4.dto.UserSignupRequest;
@@ -79,4 +80,15 @@ public class UserService {
         return userInfoResponse;
     }
 
+    public void modifyUserInfo(Long userId, UserInfoModifyRequest userInfoModifyRequest) throws NoSuchElementException{
+        String newNickname = userInfoModifyRequest.getNickname();
+        String newProfileImage = userInfoModifyRequest.getProfileImage();
+
+        Optional<User> optionalModifyTargetUser = userRepository.findByUserId(userId);
+        User modifyTargetUser = optionalModifyTargetUser.orElseThrow(NoSuchElementException::new);
+        modifyTargetUser.setNickname(newNickname);
+        modifyTargetUser.setProfileImage(newProfileImage);
+
+        userRepository.modifyUserInfo(userId, modifyTargetUser);
+    }
 }

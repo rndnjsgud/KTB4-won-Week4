@@ -9,5 +9,6 @@ public interface UserRepository {   //확장성 고려하여 인터페이스로 
     Boolean existsByEmail(String email);
     Boolean existsByNickname(String nickname);
     Long saveUser(User user);
-    Optional<User> findByUserId(Long UserId);
+    Optional<User> findByUserId(Long userId);
+    void modifyUserInfo(Long userId, User modifiedUser);
 }

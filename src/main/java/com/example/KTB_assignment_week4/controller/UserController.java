@@ -1,5 +1,6 @@
 package com.example.KTB_assignment_week4.controller;
 
+import com.example.KTB_assignment_week4.dto.UserInfoModifyRequest;
 import com.example.KTB_assignment_week4.dto.UserInfoResponse;
 import com.example.KTB_assignment_week4.dto.UserLoginRequest;
 import com.example.KTB_assignment_week4.dto.UserSignupRequest;
@@ -29,9 +30,14 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public UserInfoResponse getUserInfo(@Valid @PathVariable Long userId){
+    public UserInfoResponse getUserInfo(@PathVariable Long userId){
         UserInfoResponse userInfoResponse = userService.getUserInfo(userId);
 
         return userInfoResponse;
+    }
+
+    @PutMapping("/{userId}")
+    public void updateUserInfo(@PathVariable Long userId, @Valid @RequestBody UserInfoModifyRequest userInfoModifyRequest){
+        userService.modifyUserInfo(userId, userInfoModifyRequest);
     }
 }
