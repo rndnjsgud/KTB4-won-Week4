@@ -55,4 +55,23 @@ public class JavaUserRepository implements UserRepository{
 
         return userFindByEmail;
     }
+
+    @Override
+    public Boolean existsByEmail(String email) {    //이메일 중복확인 메소드 구현
+        return findByEmail(email).isPresent();
+    }
+
+    @Override
+    public Boolean existsByNickname(String nickname) {  //닉네임 중복확인 메소드 구현
+        Optional<User> userFindByNickname = userData.stream()
+                .filter(user -> user.getNickname().equals(nickname))
+                .findAny();
+        return userFindByNickname.isPresent();
+    }
+
+    @Override
+    public Long saveUser(User user) {
+        userData.add(user);
+        return user.getUserId();
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.KTB_assignment_week4.controller;
 
 import com.example.KTB_assignment_week4.dto.UserLoginRequest;
+import com.example.KTB_assignment_week4.dto.UserSignupRequest;
 import com.example.KTB_assignment_week4.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,9 @@ public class UserController {
         return response;
     }
 
-    //@PostMapping("/signup")
-    //public Long userSignup(@Valid @R)
+    @PostMapping("/signup")
+    public Long userSignup(@Valid @RequestBody UserSignupRequest userSignupRequest){
+        Long response = userService.signup(userSignupRequest);
+        return response;
+    }
 }
