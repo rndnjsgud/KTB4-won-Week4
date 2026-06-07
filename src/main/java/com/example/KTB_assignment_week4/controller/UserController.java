@@ -1,6 +1,6 @@
 package com.example.KTB_assignment_week4.controller;
 
-import com.example.KTB_assignment_week4.dto.*;
+import com.example.KTB_assignment_week4.dto.userDTO.*;
 import com.example.KTB_assignment_week4.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;

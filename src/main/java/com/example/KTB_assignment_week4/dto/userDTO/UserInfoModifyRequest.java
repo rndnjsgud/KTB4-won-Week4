@@ -1,4 +1,4 @@
-package com.example.KTB_assignment_week4.dto;
+package com.example.KTB_assignment_week4.dto.userDTO;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

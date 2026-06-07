@@ -2,7 +2,7 @@ package com.example.KTB_assignment_week4.service;
 
 import com.example.KTB_assignment_week4.domain.User;
 import com.example.KTB_assignment_week4.domain.UserRole;
-import com.example.KTB_assignment_week4.dto.*;
+import com.example.KTB_assignment_week4.dto.userDTO.*;
 import com.example.KTB_assignment_week4.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
