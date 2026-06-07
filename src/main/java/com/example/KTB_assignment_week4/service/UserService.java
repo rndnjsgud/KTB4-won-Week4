@@ -77,7 +77,7 @@ public class UserService {
         return userInfoResponse;
     }
 
-    public void modifyUserInfo(Long userId, UserInfoModifyRequest userInfoModifyRequest) throws NoSuchElementException{
+    public String modifyUserInfo(Long userId, UserInfoModifyRequest userInfoModifyRequest) throws NoSuchElementException{
         String newNickname = userInfoModifyRequest.getNickname();
         String newProfileImage = userInfoModifyRequest.getProfileImage();
 
@@ -87,9 +87,11 @@ public class UserService {
         modifyTargetUser.setProfileImage(newProfileImage);
 
         userRepository.modifyUserInfo(userId, modifyTargetUser);
+
+        return "사용자 정보 수정 완료";
     }
 
-    public void modifyUserPassword(Long userId, UserPasswordModifyRequest userPasswordModifyRequest){
+    public String modifyUserPassword(Long userId, UserPasswordModifyRequest userPasswordModifyRequest) throws NoSuchElementException{
         String modifiedPassword = userPasswordModifyRequest.getPassword();
 
         Optional<User> optionalPasswordModifyTargetUser = userRepository.findByUserId(userId);
@@ -97,5 +99,17 @@ public class UserService {
         passwordModifyTargetUser.setPassWord(modifiedPassword);
 
         userRepository.modifyUserPassword(userId, passwordModifyTargetUser);
+
+        return "비밀번호 변경 성공";
+    }
+
+    public String deleteUser(Long userId){
+        Optional<User> optionalDeleteTargetUser = userRepository.findByUserId(userId);
+        User deleteTargetUser = optionalDeleteTargetUser.orElseThrow(NoSuchElementException::new);
+        deleteTargetUser.setIsDeleted(true);
+
+        userRepository.deleteUser(userId, deleteTargetUser);
+
+        return "사용자 삭제 성공";
     }
 }

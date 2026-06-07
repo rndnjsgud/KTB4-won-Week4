@@ -12,4 +12,5 @@ public interface UserRepository {   //확장성 고려하여 인터페이스로 
     Optional<User> findByUserId(Long userId);
     void modifyUserInfo(Long userId, User modifiedUser);
     void modifyUserPassword(Long userId, User passwordModifiedPassword);
+    void deleteUser(Long userId, User deletedUser);
 }

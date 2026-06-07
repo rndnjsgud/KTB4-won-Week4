@@ -34,12 +34,22 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")    //사용자 정보 수정 메소드
-    public void updateUserInfo(@PathVariable Long userId, @Valid @RequestBody UserInfoModifyRequest userInfoModifyRequest){
-        userService.modifyUserInfo(userId, userInfoModifyRequest);
+    public String updateUserInfo(@PathVariable Long userId, @Valid @RequestBody UserInfoModifyRequest userInfoModifyRequest){
+        String response = userService.modifyUserInfo(userId, userInfoModifyRequest);
+
+        return response;
     }
 
     @PutMapping("/{userId}/password")   //사용자 비밀번호 수정 메소드
-    public void updateUserPassword(@PathVariable Long userId, @Valid @RequestBody UserPasswordModifyRequest userPasswordModifyRequest){
-        userService.modifyUserPassword(userId, userPasswordModifyRequest);
+    public String updateUserPassword(@PathVariable Long userId, @Valid @RequestBody UserPasswordModifyRequest userPasswordModifyRequest){
+        String response = userService.modifyUserPassword(userId, userPasswordModifyRequest);
+
+        return response;
+    }
+
+    @PatchMapping("/{userId}") //사용자 삭제 메소드
+    public String deleteUser(@PathVariable Long userId){
+        String response = userService.deleteUser(userId);
+        return response;
     }
 }

@@ -95,4 +95,11 @@ public class JavaUserRepository implements UserRepository{
         int indexOfFoundUser = userData.indexOf(passwordModifyTargetUser.orElseThrow(NoSuchElementException::new));
         userData.set(indexOfFoundUser, passwordModifiedUser);
     }
+
+    @Override
+    public void deleteUser(Long userId, User deletedUser) {
+        Optional<User> deleteTargetUser = findByUserId(userId);
+        int indexOfFoundUser = userData.indexOf(deleteTargetUser.orElseThrow(NoSuchElementException::new));
+        userData.set(indexOfFoundUser, deletedUser);
+    }
 }
