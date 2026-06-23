@@ -1,6 +1,6 @@
 package com.example.KTB_assignment_week4.repository;
 
-import com.example.KTB_assignment_week4.domain.User;
+import com.example.KTB_assignment_week4.domain.user.User;
 
 import java.util.*;
 

@@ -1,7 +1,7 @@
 package com.example.KTB_assignment_week4.service;
 
-import com.example.KTB_assignment_week4.domain.User;
-import com.example.KTB_assignment_week4.domain.UserRole;
+import com.example.KTB_assignment_week4.domain.user.User;
+import com.example.KTB_assignment_week4.domain.user.UserRole;
 import com.example.KTB_assignment_week4.dto.userDTO.Request.*;
 import com.example.KTB_assignment_week4.dto.userDTO.Response.UserInfoModifyResponse;
 import com.example.KTB_assignment_week4.dto.userDTO.Response.UserInfoResponse;
@@ -48,7 +48,7 @@ public class UserService {
             throw new UnauthorizedException(UserErrorMessage.USER_NOT_FOUND);
         }
 
-        session.setAttribute("LOGIN_USER_ID", userFoundByEmail.getUserId());    //현재 로그인한 유저의 ID저장
+        session.setAttribute("LOGIN_USER_ID", userFoundByEmail.getId());    //현재 로그인한 유저의 ID저장
         session.setAttribute("LOGIN_EXPIRES_AT", LocalDateTime.now().plusMinutes(30).toString()); //해당 로그인 유저의 ID를 30분동안 유효하도록 설정
 
         return UserLoginResponse.from(userFoundByEmail);

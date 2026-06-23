@@ -1,0 +1,36 @@
+package com.example.KTB_assignment_week4.domain.comment;
+
+import com.example.KTB_assignment_week4.domain.user.User;
+import jakarta.persistence.*;
+import lombok.Getter;
+
+@Entity
+@Getter
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_comment_like_record_user_comment",
+                        columnNames = {"user_id", "comment_id"}
+                )
+        }
+)
+public class CommentLikeRecord {
+    @Id @GeneratedValue
+    @Column(name = "comment_like_record_id")
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User likedUser;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id")
+    private Comment likedComment;
+
+    protected CommentLikeRecord() {}
+
+    public CommentLikeRecord(User likedUser, Comment likedComment){
+        this.likedUser = likedUser;
+        this.likedComment = likedComment;
+    }
+}
